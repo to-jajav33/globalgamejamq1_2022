@@ -29,6 +29,7 @@ public class SceneController : MonoBehaviour
             TempLevelData tld = tempData.AddComponent<TempLevelData>();
             tld.stringData = sceneName;
             SceneManager.LoadScene("persistent");
+            SceneManager.UnloadScene(sceneName);
             this.gameObject.SetActive(false);
         }
     }

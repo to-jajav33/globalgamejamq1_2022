@@ -6,6 +6,12 @@ public class PoolObject : MonoBehaviour
 {
     public ObjectPool Pool { get; set; }
 
+    private IPoolReset[] resetObjects;
+
+    private void Awake()
+    {
+        resetObjects = GetComponentsInChildren<IPoolReset>();
+    }
     private void OnDisable()
     {
         StopAllCoroutines();
@@ -19,7 +25,23 @@ public class PoolObject : MonoBehaviour
             return;
         }
 
+        foreach (IPoolReset pr in resetObjects)
+        {
+            pr.PoolReset();
+        }
+
         Pool.ReturnToPool(this);
+    }
+
+    public void DelayReturnToPool(float delay)
+    {
+        StartCoroutine(coDelayReturnToPool(delay));
+    }
+
+    private IEnumerator coDelayReturnToPool(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ReturnToPool();
     }
 
 

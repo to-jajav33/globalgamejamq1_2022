@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChunkEndPosition : MonoBehaviour
+public class ChunkMidPosition : MonoBehaviour
 {
     private LevelChunk parentChunk;
 
@@ -12,12 +12,12 @@ public class ChunkEndPosition : MonoBehaviour
         parentChunk = GetComponentInParent<LevelChunk>();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && !isPlayerTriggered)
         {
             isPlayerTriggered = true;
-            parentChunk.PlayerExitedChunk();
+            parentChunk.PlayerMiddleChunk();
         }
     }
 

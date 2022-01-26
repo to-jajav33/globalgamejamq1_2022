@@ -23,4 +23,8 @@ public class ChunkStartPosition : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        isPlayerTriggered = false;
+    }
 }
