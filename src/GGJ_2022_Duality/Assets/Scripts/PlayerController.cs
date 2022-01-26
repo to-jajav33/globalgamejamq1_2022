@@ -11,15 +11,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayermask;
 
-    private bool isFlying = false;
+    private bool isFlying = true;
+    private bool canMove = true;
 
     [SerializeField]
     private float jumpForce = 50f;
+
+    
+    private float moveForce = 25f;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         cirCol = GetComponent<CircleCollider2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        float moveInput = canMove ? 1 : 0;
+        body.velocity = new Vector2(moveInput * moveForce, body.velocity.y);
     }
 
     public void JumpAction(bool isJumping)
