@@ -39,19 +39,16 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     public void PlayerEnteredChunk()
     {
         OnEnterChunk.Invoke(chunkID);
-        Debug.Log("PlayerEnteredChunk: " + chunkID);
     }
 
     public void PlayerMiddleChunk()
     {
         OnMiddleChunk(chunkID);
-        Debug.Log("PlayerMiddleChunk: " + chunkID);
     }
 
     public void PlayerExitedChunk()
     {
         OnExitChunk(chunkID);
-        Debug.Log("PlayerExitedChunk: " + chunkID);
         pool.DelayReturnToPool(2f);
     }
 

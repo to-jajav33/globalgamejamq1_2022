@@ -12,6 +12,14 @@ public class PoolObject : MonoBehaviour
     {
         resetObjects = GetComponentsInChildren<IPoolReset>();
     }
+
+    private void Start()
+    {
+        if (Pool == null)
+        {
+            Pool = PoolManager.Instance.GetPool(gameObject.name);
+        }
+    }
     private void OnDisable()
     {
         StopAllCoroutines();
