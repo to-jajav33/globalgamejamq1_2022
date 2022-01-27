@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class PlayerController : MonoBehaviour
@@ -11,8 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayermask;
 
-    private bool isFlying = true;
-    private bool canMove = true;
+    private bool isFlying = false;
+    private bool canMove = false;
 
     [SerializeField]
     private float jumpForce = 50f;
@@ -20,10 +21,24 @@ public class PlayerController : MonoBehaviour
     
     private float moveForce = 25f;
 
+    private GameController gameController;
+
+    private UnityAction actionOnDayTime;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         cirCol = GetComponent<CircleCollider2D>();
+        gameController = FindObjectOfType<GameController>();
+
+        actionOnDayTime += this.OnDaytime;
+        
+        gameController.StartListening(GameControllerEvents.START_DAYTIME, actionOnDayTime);
+    }
+
+    private void OnDaytime () {
+        canMove = true;
+        isFlying = false;
     }
 
     private void FixedUpdate()

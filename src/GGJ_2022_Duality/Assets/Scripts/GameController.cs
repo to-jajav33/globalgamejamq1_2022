@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Reflection;
+using UnityEngine.UI;
 
 public class GameControllerEvents {
 
@@ -21,15 +22,16 @@ public class GameController : MonoBehaviour
 {
     public EventManager eventManager;
 
-    private float DAY_TIME_MAX_COUNTDOWN = 10000f; // in milliseconds
-    private float AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME = 10.0f;
+    private float BEGINNING_MAX_COUNTDOWN = 3.0f;
+    private float DAY_TIME_MAX_COUNTDOWN = 10.0f; // in seconds
+    private float AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME = 0.01f;
 
     private int score = 0;
     private int currCollectedNightTime = 0;
-    private float time = 10000.0f;
+    private float time = 10.0f; // in seconds
     private bool isTimerRunning = false;
-    private bool isDayTime = true;
-    private bool isStartCountdown = true;
+    private bool isDayTime = false;
+    private bool isStartCountdown = false;
 
 
     private void OnEnable() {
@@ -40,6 +42,10 @@ public class GameController : MonoBehaviour
                 Debug.LogError("Could not find Event Manager");
             }
         }
+    }
+
+    private void FixedUpdate() {
+        Debug.Log(this.time);
     }
 
     private void Update() {
@@ -59,8 +65,8 @@ public class GameController : MonoBehaviour
     }
 
     private void Start() {
-        // call this after everything is setup...
-        // this.TriggerInitialCountdownStart();
+        // call this after everything is setup... for now just doing it immediately
+        this.TriggerInitialCountdownStart();
     }
 
     private void OnDisable() {
@@ -77,7 +83,7 @@ public class GameController : MonoBehaviour
     }
 
     public void TriggerInitialCountdownStart() {
-        this.time = 3000.0f;
+        this.time = this.BEGINNING_MAX_COUNTDOWN;
         this.isStartCountdown = true;
         this.isTimerRunning = true;
         this.eventManager.TriggerEvent(GameControllerEvents.START_INITIAL_COUNTDOWN);
