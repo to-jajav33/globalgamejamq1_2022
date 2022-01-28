@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
         cirCol = GetComponent<CircleCollider2D>();
         gameController = FindObjectOfType<GameController>();
 
+        gameController.SetPlayerController(this);
+
         actionOnDayTime += this.OnDaytime;
         
         gameController.StartListening(GameControllerEvents.START_DAYTIME, actionOnDayTime);
@@ -96,6 +98,10 @@ public class PlayerController : MonoBehaviour
             //body.velocity = Vector2.up * jumpForce;
         }
 
+    }
+
+    public float GetCurrHealth() {
+        return this.currHealth;
     }
 
     private bool IsAgainstWall()

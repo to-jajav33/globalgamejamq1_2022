@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEngine.UI;
 
 public class GameControllerEvents {
-
+    public static string HEALTH_ACTION = "HEALTH_ACTION";
     public static string START_INITIAL_COUNTDOWN = "START_INITIAL_COUNTDOWN";
     public static string START_DAYTIME = "START_DAYTIME";
     public static string STOP_DAYTIME = "STOP_DAYTIME";
@@ -21,6 +21,7 @@ public class GameControllerEvents {
 public class GameController : MonoBehaviour
 {
     public EventManager eventManager;
+    public  PlayerController pc;
 
     private float BEGINNING_MAX_COUNTDOWN = 3.0f;
     private float DAY_TIME_MAX_COUNTDOWN = 10.0f; // in seconds
@@ -46,6 +47,10 @@ public class GameController : MonoBehaviour
 
     private void FixedUpdate() {
         //Debug.Log(this.time);
+    }
+
+    public float GetTime() {
+        return Mathf.Ceil(this.time * 10.0f) / 10.0f;
     }
 
     private void Update() {
@@ -80,6 +85,15 @@ public class GameController : MonoBehaviour
 
     public int GetScore() {
         return this.currCollectedNightTime + this.score;
+    }
+
+    public void SetPlayerController(PlayerController paramPC) {
+        this.pc = paramPC;
+        this.pc.OnHealthAction += this.TriggerHealthaction;
+    }
+
+    public void TriggerHealthaction() {
+        this.eventManager.TriggerEvent(GameControllerEvents.HEALTH_ACTION);
     }
 
     public void TriggerInitialCountdownStart() {
