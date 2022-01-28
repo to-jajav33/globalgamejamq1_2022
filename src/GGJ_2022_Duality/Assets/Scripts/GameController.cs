@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        Debug.Log(this.time);
+        //Debug.Log(this.time);
     }
 
     private void Update() {

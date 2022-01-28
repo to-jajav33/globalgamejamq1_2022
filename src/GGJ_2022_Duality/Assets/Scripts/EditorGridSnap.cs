@@ -17,7 +17,7 @@ public class EditorGridSnap : MonoBehaviour
             float roundX = Mathf.Round(transform.localPosition.x) / unitSize;
             float roundY = Mathf.Round(transform.localPosition.y) / unitSize;
 
-            transform.localPosition = new Vector3(roundX, roundY, transform.localPosition.z);
+            transform.localPosition = new Vector3(roundX + 0.5f, roundY + 0.5f, transform.localPosition.z);
             lastPos = transform.localPosition;
         }
     }
