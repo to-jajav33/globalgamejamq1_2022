@@ -5,17 +5,7 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
-    private Dictionary<string, UnityEvent> eventDictionary;
-
-    private void Awake() {
-        this.Init();
-    }
-
-    void Init() {
-        if (this.eventDictionary == null) {
-            this.eventDictionary = new Dictionary<string, UnityEvent>();
-        }
-    }
+    private Dictionary<string, UnityEvent> eventDictionary = new Dictionary<string, UnityEvent>();
 
     public void StartListening(string eventName, UnityAction listener) {
         UnityEvent ev = null;
