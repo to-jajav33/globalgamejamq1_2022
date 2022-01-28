@@ -48,6 +48,10 @@ public class GameController : MonoBehaviour
         //Debug.Log(this.time);
     }
 
+    public float GetTime() {
+        return Mathf.Ceil(this.time * 10.0f) / 10.0f;
+    }
+
     private void Update() {
         if (this.isTimerRunning) {
             this.time -= Time.deltaTime;
