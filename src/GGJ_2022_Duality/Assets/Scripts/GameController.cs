@@ -130,17 +130,11 @@ public class GameController : MonoBehaviour
         this.eventManager.TriggerEvent(GameControllerEvents.STOP_DAYTIME);
     }
 
-    public float GetCurrCollectedNightTimeAmount () {
-        float minAmountToStartNightWith = 3.0f; // seconds
-        return Mathf.Max(minAmountToStartNightWith, Mathf.Min(this.DAY_TIME_MAX_COUNTDOWN, this.currCollectedNightTime * this.AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME));
-    }
-
-    public float GetCurrCollectedNightTimePercent () {
-        return this.GetCurrCollectedNightTimeAmount() / this.DAY_TIME_MAX_COUNTDOWN;
-    }
-
     public void TriggerNightTimeStart() {
+        this.isTransitionCountdown = false;
+        this.isStartCountdown = false;
         this.isDayTime = false;
+
         this.time = this.GetCurrCollectedNightTimeAmount();
         this.isTimerRunning = true;
         this.eventManager.TriggerEvent(GameControllerEvents.START_NIGHTTIME);
@@ -150,10 +144,21 @@ public class GameController : MonoBehaviour
         this.score += this.currCollectedNightTime;
         this.currCollectedNightTime = 0;
 
-        this.time = 0.0f;
-        this.isTimerRunning = false;
+        this.time = this.BEGINNING_MAX_COUNTDOWN;
+
+        this.isTimerRunning = true;
+        this.isTransitionCountdown = true;
 
         this.eventManager.TriggerEvent(GameControllerEvents.STOP_NIGHTTIME);
+    }
+
+    public float GetCurrCollectedNightTimeAmount () {
+        float minAmountToStartNightWith = 3.0f; // seconds
+        return Mathf.Max(minAmountToStartNightWith, Mathf.Min(this.DAY_TIME_MAX_COUNTDOWN, this.currCollectedNightTime * this.AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME));
+    }
+
+    public float GetCurrCollectedNightTimePercent () {
+        return this.GetCurrCollectedNightTimeAmount() / this.DAY_TIME_MAX_COUNTDOWN;
     }
 
     public void TriggerGameOver() {
