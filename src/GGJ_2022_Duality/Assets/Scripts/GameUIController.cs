@@ -41,7 +41,7 @@ public class GameUIController : MonoBehaviour
     public void onStartInitialCountDown() {
         shouldShowCountdown = true;
         textCountDown.text = shouldShowCountdown ? gameController.GetTime().ToString().PadLeft(4) : "0.0";
-        
+
         timerRect.offsetMax = new Vector2(0.0f, timerRect.offsetMax.y);
     }
 
@@ -53,5 +53,9 @@ public class GameUIController : MonoBehaviour
 
     private void FixedUpdate() {
         textCountDown.text = shouldShowCountdown ? gameController.GetTime().ToString() : "";
+
+        if (!shouldShowCountdown) {
+           timerRect.offsetMax = new Vector2(gameController.GetTimeProgress() * -100.0f, timerRect.offsetMax.y);
+        }
     }
 }

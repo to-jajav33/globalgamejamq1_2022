@@ -53,6 +53,10 @@ public class GameController : MonoBehaviour
         return Mathf.Ceil(this.time * 10.0f) / 10.0f;
     }
 
+    public float GetTimeProgress() {
+        return (this.DAY_TIME_MAX_COUNTDOWN - this.GetTime()) / this.DAY_TIME_MAX_COUNTDOWN;
+    }
+
     private void Update() {
         if (this.isTimerRunning) {
             this.time -= Time.deltaTime;
