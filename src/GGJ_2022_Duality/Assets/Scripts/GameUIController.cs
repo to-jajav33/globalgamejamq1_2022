@@ -47,15 +47,15 @@ public class GameUIController : MonoBehaviour
 
     public void onStartDayTime() {
         shouldShowCountdown = false;
-
-        timerRect.offsetMax = new Vector2(0.0f, timerRect.offsetMax.y);
     }
 
     private void FixedUpdate() {
         textCountDown.text = shouldShowCountdown ? gameController.GetTime().ToString() : "";
 
         if (!shouldShowCountdown) {
-           timerRect.offsetMax = new Vector2(gameController.GetTimeProgress() * -100.0f, timerRect.offsetMax.y);
+            /** @todo I don't know how to get the width of the parent. I was going to use anchor instead but couldn't get it to work. so hard coding widht for now. */
+            float parentWidth = 100.0f;
+           timerRect.offsetMax = new Vector2(gameController.GetTimeProgress() * -parentWidth, timerRect.offsetMax.y);
         }
     }
 }
