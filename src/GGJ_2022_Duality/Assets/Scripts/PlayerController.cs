@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     private GameController gameController;
 
     private UnityAction actionOnDayTime;
+    private UnityAction actionOnDayTimeStop;
+    private UnityAction actionOnNightTime;
+    private UnityAction actionOnNightTimeStop;
 
     public Action OnHealthAction = delegate { };
 
@@ -38,13 +41,32 @@ public class PlayerController : MonoBehaviour
         gameController.SetPlayerController(this);
 
         actionOnDayTime += this.OnDaytime;
-        
+        actionOnDayTimeStop += this.OnDaytimeStop;
         gameController.StartListening(GameControllerEvents.START_DAYTIME, actionOnDayTime);
+        gameController.StartListening(GameControllerEvents.STOP_DAYTIME, actionOnDayTimeStop);
+        actionOnNightTime += this.OnNightTime;
+        actionOnNightTimeStop += this.OnNightTimeStop;
+        
+        gameController.StartListening(GameControllerEvents.START_NIGHTTIME, actionOnNightTime);
+        gameController.StartListening(GameControllerEvents.STOP_NIGHTTIME, actionOnNightTimeStop);
+    }
+
+    private void OnNightTime () {
+        canMove = true;
+        isFlying = true;
+    }
+
+    private void OnNightTimeStop() {
+        canMove = false;
     }
 
     private void OnDaytime () {
         canMove = true;
         isFlying = false;
+    }
+
+    private void OnDaytimeStop() {
+        canMove = false;
     }
 
     private void FixedUpdate()
