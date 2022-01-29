@@ -51,8 +51,6 @@ public class GameUIController : MonoBehaviour
     }
 
     public void onStopDaytime() {
-        Debug.Log("Start night time amount ");
-        Debug.Log(gameController.GetCurrCollectedNightTimePercent());
         timerRect.offsetMax = this.GetNightTimeOffset();
         this.shouldShowCountdown = true;
     }
@@ -67,7 +65,6 @@ public class GameUIController : MonoBehaviour
 
         float healthCount = gameController.pc.GetCurrHealth();
 
-        Debug.Log(allChildren.Length);
         for (int i = 0; i < allChildren.Length; i++) {
             allChildren[i].SetAlpha(i < healthCount ? 1 : 0);
         }

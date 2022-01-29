@@ -1256,6 +1256,7 @@ MonoBehaviour:
   gameController: {fileID: 406274759}
   textCountDown: {fileID: 727359754}
   healthContainer: {fileID: 1564626410}
+  timerRect: {fileID: 713645345}
 --- !u!1001 &2133262777
 PrefabInstance:
   m_ObjectHideFlags: 0
