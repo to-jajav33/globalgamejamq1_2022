@@ -15,7 +15,7 @@ public class LevelGenerator : MonoBehaviour
 
     private PoolManager pManager;
     private ObjectPool startChunkPool;
-    private int numDiffChunks = 3;
+    public int numDiffChunks = 4;
     private ObjectPool[] chunksPools;
 
     private void Awake()

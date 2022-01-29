@@ -17,7 +17,8 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     private PoolObject pool;
 
     private Tilemap[] tilemaps;
-    private ObjectSpawner[] allSpawners;
+    private HealObjectSpawner[] healSpawners;
+    private HurtObjectSpawner[] hurtSpawners;
 
     public Action OnChunkSpawn = delegate { };
     public Action<int> OnEnterChunk = delegate { };
@@ -37,7 +38,8 @@ public class LevelChunk : MonoBehaviour, IPoolReset
         pool = GetComponent<PoolObject>();
 
         tilemaps = GetComponentsInChildren<Tilemap>();
-        allSpawners = GetComponentsInChildren<ObjectSpawner>();
+        healSpawners = GetComponentsInChildren<HealObjectSpawner>();
+        hurtSpawners = GetComponentsInChildren<HurtObjectSpawner>();
     }
 
     private void OnEnable()
@@ -54,24 +56,48 @@ public class LevelChunk : MonoBehaviour, IPoolReset
 
         OnChunkSpawn?.Invoke();
 
-        int spawnersToSpawn = allSpawners.Length / 2;
+        SpawnHealObjects();
+        SpawnHurtObjects();      
+    }
+
+    private void SpawnHealObjects()
+    {
+        int spawnersToSpawn = healSpawners.Length / 2;
         List<int> indexesSelected = new List<int>();
         for (int i = 0; i < spawnersToSpawn; i++)
         {
             int newIndex;
             do
             {
-                newIndex = Mathf.RoundToInt(UnityEngine.Random.Range(0, allSpawners.Length - 1));
+                newIndex = Mathf.RoundToInt(UnityEngine.Random.Range(0, healSpawners.Length - 1));
             } while (indexesSelected.Contains(newIndex));
             indexesSelected.Add(newIndex);
         }
 
         foreach (int i in indexesSelected)
         {
-            allSpawners[i].SpawnObject();
+            healSpawners[i].SpawnObject();
+        }
+    }
+
+    private void SpawnHurtObjects()
+    {
+        int spawnersToSpawn = hurtSpawners.Length / 2;
+        List<int> indexesSelected = new List<int>();
+        for (int i = 0; i < spawnersToSpawn; i++)
+        {
+            int newIndex;
+            do
+            {
+                newIndex = Mathf.RoundToInt(UnityEngine.Random.Range(0, hurtSpawners.Length - 1));
+            } while (indexesSelected.Contains(newIndex));
+            indexesSelected.Add(newIndex);
         }
 
-       
+        foreach (int i in indexesSelected)
+        {
+            hurtSpawners[i].SpawnObject();
+        }
     }
 
     public void PlayerEnteredChunk()
