@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     private bool isTimerRunning = false;
     private bool isDayTime = false;
     private bool isStartCountdown = false;
+    private bool isTransitionCountdown = false;
 
 
     private void OnEnable() {
@@ -64,6 +65,12 @@ public class GameController : MonoBehaviour
             if (this.time <= 0.0f) {
                 if (this.isStartCountdown) {
                     this.TriggerDayTimeStart();
+                } else if (this.isTransitionCountdown) {
+                    if (this.isDayTime) {
+                        this.TriggerNightTimeStart();
+                    } else {
+                        this.TriggerDayTimeStart();
+                    }
                 } else if (this.isDayTime) {
                     this.TriggerDayTimeStop();
                 } else {
@@ -108,6 +115,7 @@ public class GameController : MonoBehaviour
     }
 
     public void TriggerDayTimeStart() {
+        this.isTransitionCountdown = false;
         this.isStartCountdown = false;
         this.isDayTime = true;
         this.time = this.DAY_TIME_MAX_COUNTDOWN;
@@ -116,14 +124,24 @@ public class GameController : MonoBehaviour
     }
 
     public void TriggerDayTimeStop() {
-        this.time = 0.0f;
-        this.isTimerRunning = false;
+        this.time = this.BEGINNING_MAX_COUNTDOWN;
+        this.isTimerRunning = true;
+        this.isTransitionCountdown = true;
         this.eventManager.TriggerEvent(GameControllerEvents.STOP_DAYTIME);
+    }
+
+    public float GetCurrCollectedNightTimeAmount () {
+        float minAmountToStartNightWith = 3.0f; // seconds
+        return Mathf.Max(minAmountToStartNightWith, Mathf.Min(this.DAY_TIME_MAX_COUNTDOWN, this.currCollectedNightTime * this.AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME));
+    }
+
+    public float GetCurrCollectedNightTimePercent () {
+        return this.GetCurrCollectedNightTimeAmount() / this.DAY_TIME_MAX_COUNTDOWN;
     }
 
     public void TriggerNightTimeStart() {
         this.isDayTime = false;
-        this.time = this.currCollectedNightTime * this.AMOUNT_OF_TIME_PER_COLLECTED_NIGHTTIME;
+        this.time = this.GetCurrCollectedNightTimeAmount();
         this.isTimerRunning = true;
         this.eventManager.TriggerEvent(GameControllerEvents.START_NIGHTTIME);
     }
