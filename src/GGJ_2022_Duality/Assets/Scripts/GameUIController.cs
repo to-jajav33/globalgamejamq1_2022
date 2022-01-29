@@ -11,6 +11,8 @@ public class GameUIController : MonoBehaviour
     public Text textCountDown;
     public GameObject healthContainer;
 
+    public RectTransform timerRect;
+
     private UnityAction actionOnStartInitialCountdown;
     private UnityAction actionOnStartDayTime;
     private UnityAction actionOnHealthAction;
@@ -39,10 +41,14 @@ public class GameUIController : MonoBehaviour
     public void onStartInitialCountDown() {
         shouldShowCountdown = true;
         textCountDown.text = shouldShowCountdown ? gameController.GetTime().ToString().PadLeft(4) : "0.0";
+        
+        timerRect.offsetMax = new Vector2(0.0f, timerRect.offsetMax.y);
     }
 
     public void onStartDayTime() {
         shouldShowCountdown = false;
+
+        timerRect.offsetMax = new Vector2(0.0f, timerRect.offsetMax.y);
     }
 
     private void FixedUpdate() {
