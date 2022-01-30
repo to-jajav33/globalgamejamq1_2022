@@ -183,14 +183,14 @@ public class PlayerController : MonoBehaviour
     private bool IsAgainstWall()
     {
         Vector3 actualSize = boxCol.bounds.size + new Vector3(boxCol.edgeRadius, boxCol.edgeRadius, boxCol.edgeRadius);
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, actualSize, 0f, Vector2.right, actualSize.x/4, groundLayermask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, actualSize, 0f, Vector2.right, actualSize.x/2, groundLayermask);
         return raycastHit.collider != null;
     }
 
     private bool IsGrounded()
     {
         Vector3 actualSize = boxCol.bounds.size + new Vector3(boxCol.edgeRadius, boxCol.edgeRadius, boxCol.edgeRadius);
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, actualSize, 0f, Vector2.down, actualSize.y/4, groundLayermask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, actualSize, 0f, Vector2.down, actualSize.y/2, groundLayermask);
         return raycastHit.collider != null;
     }
 

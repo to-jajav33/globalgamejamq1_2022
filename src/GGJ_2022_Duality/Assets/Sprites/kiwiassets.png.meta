@@ -92,6 +92,9 @@ TextureImporter:
   - first:
       213: -4907888799147916033
     second: Spikes-4
+  - first:
+      213: -7847686824991121523
+    second: FrameUI
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -806,6 +809,27 @@ TextureImporter:
       bones: []
       spriteID: ff48ba9e32da3ebb0800000000000000
       internalID: -4907888799147916033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrameUI
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 32
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f14e7596a671390800000000000000
+      internalID: -7847686824991121523
       vertices: []
       indices: 
       edges: []

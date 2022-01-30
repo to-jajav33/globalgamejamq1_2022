@@ -22,7 +22,8 @@ public class MenuScoreText : MonoBehaviour
 
     private void OnDisable()
     {
-        gc.NewScoreEvent -= UpdateScore;
+        if(gc)
+            gc.NewScoreEvent -= UpdateScore;
     }
 
     private void UpdateScore(int score)

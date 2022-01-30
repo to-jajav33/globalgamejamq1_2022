@@ -11,7 +11,7 @@ public class EditorGridSnap : MonoBehaviour
     void Update()
     {
         if (EditorApplication.isPlaying) return;
-
+        /*
         if (transform.localPosition != lastPos)
         {
             float roundX = Mathf.RoundToInt(transform.localPosition.x) / unitSize;
@@ -19,7 +19,7 @@ public class EditorGridSnap : MonoBehaviour
 
             transform.localPosition = new Vector3(roundX + 0.5f, roundY + 0.5f, transform.localPosition.z);
             lastPos = transform.localPosition;
-        }
+        }*/
     }
 }
 #endif

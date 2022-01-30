@@ -9,7 +9,7 @@ public class GameUIController : MonoBehaviour
     public bool shouldShowCountdown = false;
     public GameController gameController;
     public Text textCountDown;
-    public GameObject healthContainer;
+    private HealthContainer healthContainer;
 
     public RectTransform timerRect;
     
@@ -37,6 +37,8 @@ public class GameUIController : MonoBehaviour
         gameController.StartListening(GameControllerEvents.STOP_DAYTIME, actionOnStopDaytime);
         gameController.StartListening(GameControllerEvents.START_NIGHTTIME, actionOnStartNightTime);
         gameController.StartListening(GameControllerEvents.STOP_NIGHTTIME, actionOnStopNightTime);
+
+        healthContainer = GetComponentInChildren<HealthContainer>();
     }
     private Vector2 GetNightTimeOffset() {
         return new Vector2(Mathf.Max(0.0f, Mathf.Min(1.0f, gameController.GetCurrCollectedNightTimePercent())) * (-this.timerParentWidth), timerRect.offsetMax.y);
@@ -61,13 +63,8 @@ public class GameUIController : MonoBehaviour
     }
 
     public void onHealthAction () {
-        CanvasRenderer[] allChildren = healthContainer.GetComponentsInChildren<CanvasRenderer>();
-
         float healthCount = gameController.pc.GetCurrHealth();
-
-        for (int i = 0; i < allChildren.Length; i++) {
-            allChildren[i].SetAlpha(i < healthCount ? 1 : 0);
-        }
+        healthContainer.SetHealth((int)healthCount);
     }
     
     public void onStartInitialCountDown() {
