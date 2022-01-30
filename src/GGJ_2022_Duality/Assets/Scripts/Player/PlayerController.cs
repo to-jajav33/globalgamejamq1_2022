@@ -78,18 +78,20 @@ public class PlayerController : MonoBehaviour
         pv.SetAnimatorState(PlayerAniState.FLY, false);
         pv.SetAnimatorState(PlayerAniState.SLEEP, true);
         SetCanMove(false);
-        ToggleGravity();
         isFlying = false;
+        ToggleGravity();
     }
 
     private void OnDaytime () {
         pv.SetAnimatorState(PlayerAniState.SLEEP, false);
         SetCanMove(true);
         isFlying = false;
+        ToggleGravity();
     }
 
     private void OnDaytimeStop() {
         SetCanMove(false);
+        ToggleGravity();
         pv.SetAnimatorState(PlayerAniState.SLEEP, true);
     }
 
@@ -110,15 +112,19 @@ public class PlayerController : MonoBehaviour
 
     private void ToggleGravity()
     {
-        if (body.gravityScale < 0)
-        {
-            body.gravityScale = normalGravity;
+        if (!canMove) {
+            body.gravityScale = 0;
+            return;
         }
-        else
+
+        if (isFlying)
         {
             body.gravityScale = flyingGravity;
         }
-
+        else
+        {
+            body.gravityScale = normalGravity;
+        }
     }
 
     private void SetCanMove(bool _canMove)
@@ -140,12 +146,13 @@ public class PlayerController : MonoBehaviour
                 body.velocity = new Vector2(0, body.velocity.y);
             }
 
+        } else {
+            body.velocity = new Vector2(0.0f, 0.0f);
         }
     }
 
     public void JumpAction()
     {
-
         if (isFlying)
         {
             FlyJump();
@@ -153,6 +160,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             GroundJump();
+        }
+    }
+
+    public void JumpActionCancel() {
+        if (isFlying) {
+            FlyJumpCancel();
+        } else {
+            GroundJumpCancel();
         }
     }
 
@@ -165,18 +180,29 @@ public class PlayerController : MonoBehaviour
             float moveInput = canMove ? 1 : 0;
             Vector2 jumpVector = moveInput * Vector2.up * jumpForce;
             body.AddForce(jumpVector, ForceMode2D.Impulse);
-            //body.velocity = new Vector2(body.velocity.x, moveInput * jumpForce);
-            //body.velocity = Vector2.up * jumpForce;
+        }
+    }
+
+    private void GroundJumpCancel() {
+        if (!IsGrounded() && !isHit) {
+            float moveInput = canMove ? 1 : 0;
+            Vector2 platformerEndJumpVector = moveInput * Vector2.down * jumpForce;
+            body.AddForce(platformerEndJumpVector * 0.5f, ForceMode2D.Impulse);
         }
     }
 
     private void FlyJump()
     {
         float moveInput = canMove ? 1 : 0;
-        //Vector2 jumpVector = moveInput * Vector2.down * (3f * jumpForce/4f);
-        //body.AddForce(jumpVector, ForceMode2D.Impulse);
-        body.velocity = new Vector2(body.velocity.x, -1 * moveInput * jumpForce / 2f);
-        //body.velocity = Vector2.up * jumpForce;
+        Vector2 jumpVector = moveInput * Vector2.down * jumpForce * 0.5f;
+        body.AddForce(jumpVector, ForceMode2D.Impulse);
+    }
+
+    private void FlyJumpCancel()
+    {
+        // float moveInput = canMove ? 1 : 0;
+        // Vector2 jumpVector = moveInput * Vector2.down * jumpForce;
+        // body.AddForce(-jumpVector * 0.5f, ForceMode2D.Impulse);
     }
 
     public float GetCurrHealth()

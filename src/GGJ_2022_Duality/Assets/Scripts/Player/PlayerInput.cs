@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour
         input.Disable();
 
         input.Player.Jump.started -= OnJump;
-        input.Player.Jump.canceled -= OnJump;
+        input.Player.Jump.canceled -= OnJumpCancel;
     }
 
     private void OnEnable()
@@ -30,12 +30,7 @@ public class PlayerInput : MonoBehaviour
         input.Enable();
 
         input.Player.Jump.started += OnJump;
-        input.Player.Jump.canceled += OnJump;
-    }
-
-    private void Start()
-    {
-
+        input.Player.Jump.canceled += OnJumpCancel;
     }
 
     private void SetInput(bool _canInput)
@@ -54,14 +49,10 @@ public class PlayerInput : MonoBehaviour
     private void OnJump(InputAction.CallbackContext ctx)
     {
         pc.JumpAction();
-        /*
-        if (ctx.ReadValue<float>() == 1)
-        {
-            pc.JumpAction(true);
-        }
-        else
-        {
-            pc.JumpAction(false);
-        }*/
+    }
+
+    private void OnJumpCancel(InputAction.CallbackContext ctx)
+    {
+        pc.JumpActionCancel();
     }
 }
