@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 977558658}
   - component: {fileID: 977558657}
   - component: {fileID: 977558656}
-  - component: {fileID: 7657582227423072509}
+  - component: {fileID: 632324834}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977558655}
   m_Enabled: 1
---- !u!114 &7657582227423072509
+--- !u!114 &632324834
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,17 +93,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 977558655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c0670e14deb0634daed888b8fcb358d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
-  m_UpscaleRT: 0
-  m_PixelSnapping: 0
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
+  LookupTexture: {fileID: 2800000, guid: 5bf2bde0f61fbde4ab6138516847d636, type: 3}
 --- !u!1 &3876799896157400966
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +289,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_GravityScale: 17
   m_Material: {fileID: 6200000, guid: fba32a22d6116034592c0d19b03d62c5, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1

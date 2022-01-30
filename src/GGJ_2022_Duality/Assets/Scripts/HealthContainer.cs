@@ -20,7 +20,7 @@ public class HealthContainer : MonoBehaviour
     {
         for (int i = 1; i < healthImages.Length; i++)
         {
-            if (i<amount)
+            if (i < amount + 1)
             {
                 healthImages[i].sprite = HealthyKiwi;
             }

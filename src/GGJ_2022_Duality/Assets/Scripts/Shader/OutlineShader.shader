@@ -9,7 +9,7 @@ Shader "Unlit/InnerSpriteOutline HLSL"
 		{
 			Tags
 			{
-				"RenderType" = "Transparent"
+				"Queue" = "Transparent"
 			}
 
 			Blend SrcAlpha OneMinusSrcAlpha

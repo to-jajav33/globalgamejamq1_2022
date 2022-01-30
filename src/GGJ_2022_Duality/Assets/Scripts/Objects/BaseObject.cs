@@ -7,7 +7,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class BaseObject : MonoBehaviour
 {
-    private GameController gameController;
+    private GameController gameController => GameController.Instance;
 
     protected Collider2D col;
 
@@ -29,9 +29,8 @@ public class BaseObject : MonoBehaviour
     {
         allSR = GetComponentsInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
-        gameController = FindObjectOfType<GameController>();
-        gameController.StartListening(GameControllerEvents.START_NIGHTTIME, isNightTimeEvent);
-        gameController.StartListening(GameControllerEvents.START_DAYTIME, isDayTimeEvent);
+
+
 
         poa = GetComponent<PositiveObjectAction>();
         noa = GetComponent<NegativeObjectAction>();
@@ -44,16 +43,27 @@ public class BaseObject : MonoBehaviour
     {
         if (poa && noa)
         {
-            Debug.Log("Dual Action Set!");
             isDualAction = true;
             SetUpActions(true);
         }
+        else
+        {
+            if (poa)
+            {
+                SetAllSRMaterial(helpMaterial);
+            }
+
+            if (noa)
+            {
+                SetAllSRMaterial(hurtMaterial);
+            }
+        }
+
     }
 
     protected void OnEnable()
     {
-        isNightTimeEvent += OnNightTime;
-        isDayTimeEvent += OnDayTime;
+        gameController.OnDayTransition += OnDayTime;
     }
 
     private void SetUpActions(bool isDaytime)
@@ -96,24 +106,19 @@ public class BaseObject : MonoBehaviour
     {
         for(int i = 0; i < allSR.Length; i++)
         {
-            //allSR[i].material = mat;
+            allSR[i].material = mat;
         }
     }
 
-    private void OnDayTime()
+    private void OnDayTime(bool isDaytime)
     {
-        SetUpActions(true);
-    }
-
-    private void OnNightTime()
-    {
-        SetUpActions(false);
+        SetUpActions(isDaytime);
     }
 
     protected void OnDisable()
     {
-        isNightTimeEvent -= OnNightTime;
-        isDayTimeEvent -= OnDayTime;
+        if(gameController)
+            gameController.OnDayTransition -= OnDayTime;
     }
 
 
