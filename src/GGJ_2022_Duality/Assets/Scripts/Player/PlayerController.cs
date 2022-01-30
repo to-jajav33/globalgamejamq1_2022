@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private bool isFlying = false;
     private bool canMove = false;
     private bool isJumping = false;
+    private bool isHit = false;
+    private bool isInvincible = false;
 
     [SerializeField]
     private float jumpForce = 350f;
@@ -93,15 +95,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(((1 << collision.gameObject.layer) & groundLayermask) != 0)
+        if (isJumping)
         {
-            if (isJumping)
-            {
-                Debug.Log("Hit Ground!");
-                isJumping = false;
-                pv.SetAnimatorState(PlayerAniState.JUMP, isJumping);
-            }
+            Debug.Log("Hit Ground!");
+            isJumping = false;
+            pv.SetAnimatorState(PlayerAniState.JUMP, isJumping);
         }
+        /*
+        if (((1 << collision.gameObject.layer) & groundLayermask) != 0)
+        {
+
+        }*/
     }
 
     private void ToggleGravity()
@@ -125,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (canMove)
+        if (canMove && !isHit)
         {
             if (!IsAgainstWall())
             {
@@ -154,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
     private void GroundJump()
     {
-        if (IsGrounded())
+        if (IsGrounded() && !isHit)
         {
             isJumping = true;
             pv.SetAnimatorState(PlayerAniState.JUMP, isJumping);
@@ -196,7 +200,16 @@ public class PlayerController : MonoBehaviour
 
     public void HurtPlayer(int amount = 1)
     {
-        Debug.Log("Player Hurt!");
+        if (isHit) { return; }
+
+        if (isInvincible) { return; }
+
+        isHit = true;
+        StartCoroutine(StartInvinincibility(1f));
+        Vector2 hitVector = -1 * body.velocity.normalized * jumpForce/4;
+        hitVector.x *= 2;
+        body.AddForce(hitVector, ForceMode2D.Impulse);
+
         currHealth -= amount;
         currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
         OnHealthAction?.Invoke();
@@ -205,6 +218,16 @@ public class PlayerController : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    private IEnumerator StartInvinincibility(float length)
+    {
+        isInvincible = true;
+        pv.Invincibility(length);
+        yield return new WaitForSeconds(length/2);
+        isHit = false;
+        yield return new WaitForSeconds(length / 2);
+        isInvincible = false;
     }
 
     private void GameOver()

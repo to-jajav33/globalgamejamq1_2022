@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameUIController : MonoBehaviour
 {
     public bool shouldShowCountdown = false;
     public GameController gameController;
-    public Text textCountDown;
+    public TMP_Text textCountDown;
     private HealthContainer healthContainer;
 
     public RectTransform timerRect;

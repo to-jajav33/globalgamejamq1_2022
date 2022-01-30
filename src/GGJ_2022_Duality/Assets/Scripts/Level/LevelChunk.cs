@@ -30,13 +30,10 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     public int chunkLength = 100;
     public int chunkHeight = 50;
 
-    private SpriteRenderer background;
-
     private GameController gc => GameController.Instance;
 
     private void Awake()
     {
-        background = GetComponentInChildren<SpriteRenderer>();
         chunkStartPos = GetComponentInChildren<ChunkStartPosition>();
         chunkMidPos = GetComponentInChildren<ChunkMidPosition>();
         chunkEndPos = GetComponentInChildren<ChunkEndPosition>();
@@ -45,19 +42,6 @@ public class LevelChunk : MonoBehaviour, IPoolReset
         tilemaps = GetComponentsInChildren<Tilemap>();
         healSpawners = GetComponentsInChildren<HealObjectSpawner>();
         hurtSpawners = GetComponentsInChildren<HurtObjectSpawner>();
-        gc.OnDayTransition += OnDayTransition;
-    }
-
-    private void OnDayTransition(bool isDay)
-    {
-        if (isDay)
-        {
-            background.color = new Color(0.8f, 0.8f, 0.8f);
-        }
-        else
-        {
-            background.color = new Color(0.2f, 0.2f, 0.2f);
-        }
     }
 
     private void OnEnable()

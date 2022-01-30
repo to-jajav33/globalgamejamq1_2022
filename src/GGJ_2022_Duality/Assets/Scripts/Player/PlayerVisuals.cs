@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayerVisuals : MonoBehaviour
 {
     private Animator ani;
+    private SpriteRenderer sr;
 
     private string moveStr = "isMoving";
     private string flyStr = "isFlying";
@@ -15,6 +17,7 @@ public class PlayerVisuals : MonoBehaviour
     private void Awake()
     {
         ani = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void SetAnimatorState(PlayerAniState playerAniState, bool isOn)
@@ -43,6 +46,38 @@ public class PlayerVisuals : MonoBehaviour
     private void SetAnimatorBool(string str, bool isOn)
     {
         ani.SetBool(str, isOn);
+    }
+
+    public void Invincibility(float length)
+    {
+        StartCoroutine(InvincibilityAnimation(length));
+    }
+
+    public IEnumerator InvincibilityAnimation(float length)
+    {
+        SetAlpha(0.75f);
+        yield return new WaitForSeconds(length/8);
+        SetAlpha(0.25f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.5f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.25f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.75f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.25f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.5f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(0.25f);
+        yield return new WaitForSeconds(length / 8);
+        SetAlpha(1f);
+    }
+
+    private void SetAlpha(float amount)
+    {
+        Color newAlpha = new Color(1, 1, 1, amount);
+        sr.color = newAlpha;
     }
 }
 

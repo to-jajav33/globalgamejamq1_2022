@@ -34,7 +34,7 @@ TextureImporter:
     second: Spikes-2
   - first:
       213: -6318166329070147694
-    second: kiwiassets_10
+    second: Button-1
   - first:
       213: -499970641898473780
     second: kiwiassets_12
@@ -52,7 +52,7 @@ TextureImporter:
     second: kiwiassets_18
   - first:
       213: -135053720578961873
-    second: kiwiassets_20
+    second: Button-2
   - first:
       213: 6049838361584051891
     second: kiwiassets_22
@@ -88,13 +88,19 @@ TextureImporter:
     second: Cloud-5
   - first:
       213: 1671316101174405240
-    second: Spike-3
+    second: Spikes-3
   - first:
       213: -4907888799147916033
     second: Spikes-4
   - first:
       213: -7847686824991121523
     second: FrameUI
+  - first:
+      213: 4386884337132096559
+    second: Spikes-5
+  - first:
+      213: 7080871165889232072
+    second: Spikes-6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -376,7 +382,7 @@ TextureImporter:
       name: Spikes-2
       rect:
         serializedVersion: 2
-        x: 354
+        x: 352
         y: 160
         width: 32
         height: 32
@@ -394,16 +400,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kiwiassets_10
+      name: Button-1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 128
-        width: 64
+        width: 62
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 18, y: 14, z: 22, w: 12}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -520,7 +526,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kiwiassets_20
+      name: Button-2
       rect:
         serializedVersion: 2
         x: 0
@@ -529,7 +535,7 @@ TextureImporter:
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 18, y: 14, z: 22, w: 12}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -772,7 +778,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spike-3
+      name: Spikes-3
       rect:
         serializedVersion: 2
         x: 288
@@ -796,7 +802,7 @@ TextureImporter:
       name: Spikes-4
       rect:
         serializedVersion: 2
-        x: 382
+        x: 384
         y: 160
         width: 32
         height: 32
@@ -822,7 +828,7 @@ TextureImporter:
         width: 32
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -830,6 +836,48 @@ TextureImporter:
       bones: []
       spriteID: d8f14e7596a671390800000000000000
       internalID: -7847686824991121523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes-5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2ccb79df0851ec30800000000000000
+      internalID: 4386884337132096559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes-6
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc322f2fce444260800000000000000
+      internalID: 7080871165889232072
       vertices: []
       indices: 
       edges: []
