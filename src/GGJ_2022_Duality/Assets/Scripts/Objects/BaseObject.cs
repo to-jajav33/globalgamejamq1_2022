@@ -22,6 +22,9 @@ public class BaseObject : MonoBehaviour
     private NegativeObjectAction noa;
 
     private SpriteRenderer[] allSR;
+
+    private Material helpMaterial;
+    private Material hurtMaterial;
     protected virtual void Awake()
     {
         allSR = GetComponentsInChildren<SpriteRenderer>();
@@ -32,6 +35,9 @@ public class BaseObject : MonoBehaviour
 
         poa = GetComponent<PositiveObjectAction>();
         noa = GetComponent<NegativeObjectAction>();
+
+        helpMaterial = Resources.Load<Material>("Outline-Help");
+        hurtMaterial = Resources.Load<Material>("Outline-Hurt");
     }
 
     protected virtual void Start()
@@ -60,11 +66,13 @@ public class BaseObject : MonoBehaviour
             {
                 poa.canAction = false;
                 noa.canAction = true;
+                SetAllSRMaterial(hurtMaterial);
             }
             else
             {
                 poa.canAction = true;
                 noa.canAction = false;
+                SetAllSRMaterial(helpMaterial);
             }
         }
         else
@@ -73,22 +81,22 @@ public class BaseObject : MonoBehaviour
             {
                 poa.canAction = true;
                 noa.canAction = false;
-                SetAllSRColor(Color.green);
+                SetAllSRMaterial(helpMaterial);
             }
             else
             {
-                SetAllSRColor(Color.red);
+                SetAllSRMaterial(hurtMaterial);
                 poa.canAction = false;
                 noa.canAction = true;
             }
         }
     }
 
-    private void SetAllSRColor(Color color)
+    private void SetAllSRMaterial(Material mat)
     {
         for(int i = 0; i < allSR.Length; i++)
         {
-            allSR[i].color = color;
+            //allSR[i].material = mat;
         }
     }
 
