@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TempLevelData : MonoBehaviour
 {
-    public string stringData;
+    public string stringData = string.Empty;
+    public int intData = -1;
 
     private void Awake()
     {

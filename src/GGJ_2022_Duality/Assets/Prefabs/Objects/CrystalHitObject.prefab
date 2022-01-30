@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2148117897080009168}
   - component: {fileID: 7643215989996443040}
   - component: {fileID: 3958513009845725851}
+  - component: {fileID: 8368838509478698949}
   m_Layer: 0
   m_Name: CrystalHitObject
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3047669640556855949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 955.5, y: 439.5, z: 0}
+  m_LocalPosition: {x: 956.5, y: 440.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +101,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008483887, y: -0.118133545}
+  m_Offset: {x: 0.008483887, y: -0.07270813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -111,8 +112,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7918701, y: 0.7637329}
-  m_EdgeRadius: 0
+  m_Size: {x: 0.5, y: 0.64541626}
+  m_EdgeRadius: 0.1
 --- !u!114 &5099542476284946807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +170,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8368838509478698949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047669640556855949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44f3f1638d5e1b4fb5d118c3d1ea92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

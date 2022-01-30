@@ -19,17 +19,29 @@ public class ObjectSpawner : MonoBehaviour
 
     protected void OnEnable()
     {
-        levelChunk.OnExitChunk += ReturnSpawnedObjectToPool;
+        levelChunk.OnChunkSpawn += OnChunkSpawn;
     }
 
     protected void OnDisable()
     {
-        levelChunk.OnExitChunk -= ReturnSpawnedObjectToPool;
+        levelChunk.OnChunkSpawn -= OnChunkSpawn;
+    }
+
+    private void OnChunkSpawn(bool obj)
+    {
+        if (obj)
+        {
+
+        }
+        else
+        {
+            ReturnSpawnedObjectToPool();
+        }
     }
 
     public void SpawnObject()
     {
-        int newIndex = Mathf.RoundToInt(UnityEngine.Random.Range(0, gameObjectsToSpawn.Length - 1));
+        int newIndex = UnityEngine.Random.Range(0, gameObjectsToSpawn.Length);
         ObjectPool p = pm.GetPool(gameObjectsToSpawn[newIndex].name);
 
         spawnedObject = p.Get();
@@ -37,7 +49,7 @@ public class ObjectSpawner : MonoBehaviour
         spawnedObject.transform.localPosition = Vector3.zero;
     }
 
-    private void ReturnSpawnedObjectToPool(int id)
+    private void ReturnSpawnedObjectToPool()
     {
         if (spawnedObject == null) { return; }
 

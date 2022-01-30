@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,12 @@ public class LevelGenerator : MonoBehaviour
     private int totalChunkNum = 0;
 
     private LevelChunk activeChunk;
+    private LevelChunk prevChunk;
+
     private PlayerController pController;
 
     private Queue<LevelChunk> spawnedChunkQueue = new Queue<LevelChunk>();
+
 
     private PoolManager pManager;
     private ObjectPool startChunkPool;
@@ -77,6 +81,8 @@ public class LevelGenerator : MonoBehaviour
             activeChunk.OnExitChunk -= ExitChunk;
         }
 
+        prevChunk = activeChunk;
+
         activeChunk = spawnedChunkQueue.Dequeue();
         activeChunk.OnEnterChunk += EnterChunk;
         activeChunk.OnMiddleChunk += MiddleChunk;
@@ -91,6 +97,15 @@ public class LevelGenerator : MonoBehaviour
     private void MiddleChunk(int ID)
     {
         SpawnChunk();
+        DespawnPrevChunk();
+    }
+
+    private void DespawnPrevChunk()
+    {
+        if (prevChunk)
+        {
+            prevChunk.Despawn();
+        }
     }
 
     private void ExitChunk(int ID)

@@ -15,10 +15,18 @@ public class PoolObject : MonoBehaviour
 
     private void Start()
     {
+        SetGameObjectName();
         if (Pool == null)
         {
             Pool = PoolManager.Instance.GetPool(gameObject.name);
         }
+    }
+
+    private void SetGameObjectName()
+    {
+        string name = gameObject.name;
+        string properName = name.Split('(')[0];
+        gameObject.name = properName;
     }
     private void OnDisable()
     {

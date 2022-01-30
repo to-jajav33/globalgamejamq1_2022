@@ -28,10 +28,10 @@ TextureImporter:
     second: kiwiassets_7
   - first:
       213: 3762020905047357862
-    second: kiwiassets_8
+    second: Spikes-1
   - first:
       213: 4705479376257093010
-    second: kiwiassets_9
+    second: Spikes-2
   - first:
       213: -6318166329070147694
     second: kiwiassets_10
@@ -86,6 +86,12 @@ TextureImporter:
   - first:
       213: 5981534282349076203
     second: Cloud-5
+  - first:
+      213: 1671316101174405240
+    second: Spike-3
+  - first:
+      213: -4907888799147916033
+    second: Spikes-4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -343,7 +349,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kiwiassets_8
+      name: Spikes-1
       rect:
         serializedVersion: 2
         x: 256
@@ -364,10 +370,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kiwiassets_9
+      name: Spikes-2
       rect:
         serializedVersion: 2
-        x: 288
+        x: 354
         y: 160
         width: 32
         height: 32
@@ -758,6 +764,48 @@ TextureImporter:
       bones: []
       spriteID: beedc3ffcbda20350800000000000000
       internalID: 5981534282349076203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spike-3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87824e59325b13710800000000000000
+      internalID: 1671316101174405240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spikes-4
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff48ba9e32da3ebb0800000000000000
+      internalID: -4907888799147916033
       vertices: []
       indices: 
       edges: []

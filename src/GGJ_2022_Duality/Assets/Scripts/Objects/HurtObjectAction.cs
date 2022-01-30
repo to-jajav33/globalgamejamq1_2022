@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtObjectAction : BaseObjectAction
+public class HurtObjectAction : NegativeObjectAction
 {
     protected override void OnAction()
     {

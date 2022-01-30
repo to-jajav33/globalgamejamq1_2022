@@ -53,6 +53,8 @@ public class PlayerInput : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext ctx)
     {
+        pc.JumpAction();
+        /*
         if (ctx.ReadValue<float>() == 1)
         {
             pc.JumpAction(true);
@@ -60,6 +62,6 @@ public class PlayerInput : MonoBehaviour
         else
         {
             pc.JumpAction(false);
-        }
+        }*/
     }
 }

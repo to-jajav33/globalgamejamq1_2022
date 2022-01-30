@@ -20,7 +20,7 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     private HealObjectSpawner[] healSpawners;
     private HurtObjectSpawner[] hurtSpawners;
 
-    public Action OnChunkSpawn = delegate { };
+    public Action<bool> OnChunkSpawn = delegate { };
     public Action<int> OnEnterChunk = delegate { };
     public Action<int> OnMiddleChunk = delegate { };
     public Action<int> OnExitChunk = delegate { };
@@ -30,8 +30,13 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     public int chunkLength = 100;
     public int chunkHeight = 50;
 
+    private SpriteRenderer background;
+
+    private GameController gc => GameController.Instance;
+
     private void Awake()
     {
+        background = GetComponentInChildren<SpriteRenderer>();
         chunkStartPos = GetComponentInChildren<ChunkStartPosition>();
         chunkMidPos = GetComponentInChildren<ChunkMidPosition>();
         chunkEndPos = GetComponentInChildren<ChunkEndPosition>();
@@ -40,6 +45,19 @@ public class LevelChunk : MonoBehaviour, IPoolReset
         tilemaps = GetComponentsInChildren<Tilemap>();
         healSpawners = GetComponentsInChildren<HealObjectSpawner>();
         hurtSpawners = GetComponentsInChildren<HurtObjectSpawner>();
+        gc.OnDayTransition += OnDayTransition;
+    }
+
+    private void OnDayTransition(bool isDay)
+    {
+        if (isDay)
+        {
+            background.color = new Color(0.8f, 0.8f, 0.8f);
+        }
+        else
+        {
+            background.color = new Color(0.2f, 0.2f, 0.2f);
+        }
     }
 
     private void OnEnable()
@@ -54,7 +72,7 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     {
         chunkID = _chunkID;
 
-        OnChunkSpawn?.Invoke();
+        OnChunkSpawn?.Invoke(true);
 
         SpawnHealObjects();
         SpawnHurtObjects();      
@@ -100,6 +118,12 @@ public class LevelChunk : MonoBehaviour, IPoolReset
         }
     }
 
+    public void Despawn()
+    {
+        OnChunkSpawn?.Invoke(false);
+        pool.DelayReturnToPool(1f);
+    }
+
     public void PlayerEnteredChunk()
     {
         OnEnterChunk.Invoke(chunkID);
@@ -113,7 +137,6 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     public void PlayerExitedChunk()
     {
         OnExitChunk(chunkID);
-        pool.DelayReturnToPool(2f);
     }
 
     public void PoolReset()

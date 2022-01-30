@@ -10,6 +10,7 @@ public class BaseObjectAction : MonoBehaviour
     protected PickUpObject pickUpObject;
 
     protected PlayerController pc;
+    protected GameController gc => GameController.Instance;
 
     public bool canAction = true;
 

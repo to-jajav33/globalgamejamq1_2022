@@ -8,7 +8,8 @@ public class SceneTransitionController : MonoBehaviour
 {
     private static SceneTransitionController instance;
     public static SceneTransitionController Instance {
-        get {
+        get
+        {
             if (instance == null)
             {
                 instance = FindObjectOfType<SceneTransitionController>();
@@ -17,8 +18,9 @@ public class SceneTransitionController : MonoBehaviour
         }
     }
 
-    public const string MENU_NAME = "menu";
-    public const string GAME_NAME = "game";
+    public const string MENU_NAME = "StartMenu";
+    public const string GAME_NAME = "Game";
+    public const string GAMEOVER_NAME = "GameOverMenu";
 
     private CanvasGroup faderCanvasGroup;
     private float fadeDuration = 1f;
@@ -43,7 +45,7 @@ public class SceneTransitionController : MonoBehaviour
     private void Start()
     {
         TempLevelData tld = FindObjectOfType<TempLevelData>();
-        if (tld)
+        if (tld && tld.intData.Equals(-1))
         {
             startScene = tld.stringData;
             Destroy(tld.gameObject);
@@ -60,6 +62,11 @@ public class SceneTransitionController : MonoBehaviour
     public void LoadMenu()
     {
         SwitchScenes(MENU_NAME);
+    }
+
+    public void LoadGameOver()
+    {
+        SwitchScenes(GAMEOVER_NAME);
     }
 
     public void SwitchScenes(string sceneName)

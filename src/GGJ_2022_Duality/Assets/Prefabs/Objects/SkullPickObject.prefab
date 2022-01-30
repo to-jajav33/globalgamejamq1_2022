@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7810844543164406034}
   - component: {fileID: -2367930671098824092}
   - component: {fileID: 2148117897080009168}
+  - component: {fileID: -7763888127793159930}
   - component: {fileID: 7174072718849238925}
   m_Layer: 0
   m_Name: SkullPickObject
@@ -140,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240b6eb5b5f14264297fae39dfa12e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDaytimeNegative: 1
 --- !u!114 &2148117897080009168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +152,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a17ca7ae1c91b941bd93379486c9389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canAction: 1
+--- !u!114 &-7763888127793159930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047669640556855949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fb876669149844cb10247457a70671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canAction: 1

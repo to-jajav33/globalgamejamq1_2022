@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Reflection;
 using UnityEngine.UI;
+using System;
 
 public class GameControllerEvents {
     public static string HEALTH_ACTION = "HEALTH_ACTION";
@@ -20,8 +21,21 @@ public class GameControllerEvents {
 
 public class GameController : MonoBehaviour
 {
+    private static GameController instance;
+    public static GameController Instance {
+        get {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameController>();
+            }
+            return instance;
+        }
+    }
+
     public EventManager eventManager;
     public  PlayerController pc;
+
+    private SceneTransitionController stc => SceneTransitionController.Instance;
 
     private float BEGINNING_MAX_COUNTDOWN = 3.0f;
     private float DAY_TIME_MAX_COUNTDOWN = 10.0f; // in seconds
@@ -35,6 +49,16 @@ public class GameController : MonoBehaviour
     private bool isStartCountdown = false;
     private bool isTransitionCountdown = false;
 
+    public Action<int> NewScoreEvent = delegate { };
+    public Action<bool> OnDayTransition = delegate { };
+
+    private void Awake()
+    {
+        if (instance != null && instance != this) { Destroy(this); }
+        else { instance = this; }
+
+        pc = FindObjectOfType<PlayerController>();
+    }
 
     private void OnEnable() {
         if (!(eventManager is EventManager)) {
@@ -44,6 +68,17 @@ public class GameController : MonoBehaviour
                 Debug.LogError("Could not find Event Manager");
             }
         }
+
+        pc.OnDeath += GameOver;
+    }
+
+    private void GameOver()
+    {
+        GameObject tempData = new GameObject();
+        TempLevelData tld = tempData.AddComponent<TempLevelData>();
+        tld.intData = score;
+
+        stc.LoadGameOver();
     }
 
     private void FixedUpdate() {
@@ -94,8 +129,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public int GetScore() {
-        return this.currCollectedNightTime + this.score;
+    public void AddScore(int _amount)
+    {
+        score += _amount;
+        NewScoreEvent?.Invoke(score);
     }
 
     public void SetPlayerController(PlayerController paramPC) {
@@ -121,6 +158,7 @@ public class GameController : MonoBehaviour
         this.time = this.DAY_TIME_MAX_COUNTDOWN;
         this.isTimerRunning = true;
         this.eventManager.TriggerEvent(GameControllerEvents.START_DAYTIME);
+        OnDayTransition?.Invoke(true);
     }
 
     public void TriggerDayTimeStop() {
@@ -138,10 +176,11 @@ public class GameController : MonoBehaviour
         this.time = this.GetCurrCollectedNightTimeAmount();
         this.isTimerRunning = true;
         this.eventManager.TriggerEvent(GameControllerEvents.START_NIGHTTIME);
+        OnDayTransition?.Invoke(false);
     }
 
     public void TriggerNightTimeStop() {
-        this.score += this.currCollectedNightTime;
+        AddScore(this.currCollectedNightTime);
         this.currCollectedNightTime = 0;
 
         this.time = this.BEGINNING_MAX_COUNTDOWN;

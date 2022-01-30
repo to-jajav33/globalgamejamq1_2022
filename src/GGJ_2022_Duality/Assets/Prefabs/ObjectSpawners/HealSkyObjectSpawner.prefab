@@ -58,3 +58,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectsToSpawn:
   - {fileID: -7116959686729689155, guid: dc12b9b10b66ca540967e0ea0083856d, type: 3}
+  - {fileID: -7116959686729689155, guid: cc98c25287170f846bd198d2edc72b08, type: 3}

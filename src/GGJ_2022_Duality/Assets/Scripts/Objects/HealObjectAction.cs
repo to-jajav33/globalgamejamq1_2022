@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealObjectAction : BaseObjectAction
+public class HealObjectAction : PositiveObjectAction
 {
     protected override void OnAction()
     {

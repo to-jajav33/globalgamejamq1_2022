@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2c7fbd593321245b5f047fbd7a123e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: menu
+  startScene: StartMenu
 --- !u!225 &1457342943
 CanvasGroup:
   m_ObjectHideFlags: 0

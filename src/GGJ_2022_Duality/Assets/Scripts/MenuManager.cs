@@ -20,4 +20,9 @@ public class MenuManager : MonoBehaviour
     {
         stc.LoadGame();
     }
+
+    public void TransitionToGameOver()
+    {
+        stc.LoadGameOver();
+    }
 }

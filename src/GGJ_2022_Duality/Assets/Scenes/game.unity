@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventManager: {fileID: 102567358}
-  pc: {fileID: 0}
+  pc: {fileID: 1326774127}
 --- !u!4 &406274760
 Transform:
   m_ObjectHideFlags: 0
@@ -807,8 +807,9 @@ GameObject:
   - component: {fileID: 1020562364}
   - component: {fileID: 1020562366}
   - component: {fileID: 1020562365}
+  - component: {fileID: 1020562367}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,7 +854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -930,6 +931,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020562363}
   m_CullTransparentMesh: 1
+--- !u!114 &1020562367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020562363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5a00db5ec14d84eaac2f0927af5aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075770741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1097,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1131855344}
   m_CullTransparentMesh: 1
+--- !u!114 &1326774127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7157470299279618226, guid: f26263d44a693d8409f2d0ef6680b7c0, type: 3}
+  m_PrefabInstance: {fileID: 7157470300004165094}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00660a91d06680741bea2b2520d1639b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564626410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,13 +1402,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 977558657, guid: f26263d44a693d8409f2d0ef6680b7c0, type: 3}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7157470299279618216, guid: f26263d44a693d8409f2d0ef6680b7c0, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7157470299279618217, guid: f26263d44a693d8409f2d0ef6680b7c0, type: 3}
       propertyPath: m_GravityScale
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7157470299279618228, guid: f26263d44a693d8409f2d0ef6680b7c0, type: 3}
       propertyPath: m_RootOrder
