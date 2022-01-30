@@ -78,18 +78,20 @@ public class PlayerController : MonoBehaviour
         pv.SetAnimatorState(PlayerAniState.FLY, false);
         pv.SetAnimatorState(PlayerAniState.SLEEP, true);
         SetCanMove(false);
-        ToggleGravity();
         isFlying = false;
+        ToggleGravity();
     }
 
     private void OnDaytime () {
         pv.SetAnimatorState(PlayerAniState.SLEEP, false);
         SetCanMove(true);
         isFlying = false;
+        ToggleGravity();
     }
 
     private void OnDaytimeStop() {
         SetCanMove(false);
+        ToggleGravity();
         pv.SetAnimatorState(PlayerAniState.SLEEP, true);
     }
 
@@ -110,15 +112,19 @@ public class PlayerController : MonoBehaviour
 
     private void ToggleGravity()
     {
-        if (body.gravityScale < 0)
-        {
-            body.gravityScale = normalGravity;
+        if (!canMove) {
+            body.gravityScale = 0;
+            return;
         }
-        else
+
+        if (isFlying)
         {
             body.gravityScale = flyingGravity;
         }
-
+        else
+        {
+            body.gravityScale = normalGravity;
+        }
     }
 
     private void SetCanMove(bool _canMove)
@@ -140,6 +146,8 @@ public class PlayerController : MonoBehaviour
                 body.velocity = new Vector2(0, body.velocity.y);
             }
 
+        } else {
+            body.velocity = new Vector2(0.0f, 0.0f);
         }
     }
 
