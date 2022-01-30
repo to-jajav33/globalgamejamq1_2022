@@ -186,8 +186,8 @@ public class PlayerController : MonoBehaviour
     private void GroundJumpCancel() {
         if (!IsGrounded() && !isHit) {
             float moveInput = canMove ? 1 : 0;
-            Vector2 jumpVector = moveInput * Vector2.up * jumpForce;
-            body.AddForce(-jumpVector * 0.5f, ForceMode2D.Impulse);
+            Vector2 platformerEndJumpVector = moveInput * Vector2.down * jumpForce;
+            body.AddForce(platformerEndJumpVector * 0.5f, ForceMode2D.Impulse);
         }
     }
 
