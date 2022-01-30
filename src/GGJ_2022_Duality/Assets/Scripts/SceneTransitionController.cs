@@ -21,6 +21,7 @@ public class SceneTransitionController : MonoBehaviour
     public const string MENU_NAME = "StartMenu";
     public const string GAME_NAME = "Game";
     public const string GAMEOVER_NAME = "GameOverMenu";
+    public const string INSTRUCTION_NAME = "InstructionMenu";
 
     private CanvasGroup faderCanvasGroup;
     private float fadeDuration = 1f;
@@ -67,6 +68,11 @@ public class SceneTransitionController : MonoBehaviour
     public void LoadGameOver()
     {
         SwitchScenes(GAMEOVER_NAME);
+    }
+
+    public void LoadInstruction()
+    {
+        SwitchScenes(INSTRUCTION_NAME);
     }
 
     public void SwitchScenes(string sceneName)

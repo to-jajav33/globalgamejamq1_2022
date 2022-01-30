@@ -25,4 +25,9 @@ public class MenuManager : MonoBehaviour
     {
         stc.LoadGameOver();
     }
+
+    public void TransitionToInstruction()
+    {
+        stc.LoadInstruction();
+    }
 }
