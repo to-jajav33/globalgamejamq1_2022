@@ -57,6 +57,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectsToSpawn:
-  - {fileID: -7116959686729689155, guid: dc12b9b10b66ca540967e0ea0083856d, type: 3}
+  - {fileID: 6172586814756216983, guid: 485c3e8171bc77e41a2e6205c217d4fd, type: 3}
   - {fileID: -7116959686729689155, guid: cc98c25287170f846bd198d2edc72b08, type: 3}
   - {fileID: -7116959686729689155, guid: 63f201e6425522148827780e72a60fd8, type: 3}
