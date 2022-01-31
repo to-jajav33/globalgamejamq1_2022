@@ -103,20 +103,10 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
             pv.SetAnimatorState(PlayerAniState.JUMP, isJumping);
         }
-        /*
-        if (((1 << collision.gameObject.layer) & groundLayermask) != 0)
-        {
-
-        }*/
     }
 
     private void ToggleGravity()
     {
-        if (!canMove) {
-            body.gravityScale = 0;
-            return;
-        }
-
         if (isFlying)
         {
             body.gravityScale = flyingGravity;
@@ -146,8 +136,6 @@ public class PlayerController : MonoBehaviour
                 body.velocity = new Vector2(0, body.velocity.y);
             }
 
-        } else {
-            body.velocity = new Vector2(0.0f, 0.0f);
         }
     }
 
@@ -194,8 +182,7 @@ public class PlayerController : MonoBehaviour
     private void FlyJump()
     {
         float moveInput = canMove ? 1 : 0;
-        Vector2 jumpVector = moveInput * Vector2.down * jumpForce * 0.5f;
-        body.AddForce(jumpVector, ForceMode2D.Impulse);
+        body.velocity = new Vector2(body.velocity.x, -1 * moveInput * jumpForce / 2f);
     }
 
     private void FlyJumpCancel()
@@ -226,6 +213,8 @@ public class PlayerController : MonoBehaviour
 
     public void HurtPlayer(int amount = 1)
     {
+        if (!canMove) { return; }
+
         if (isHit) { return; }
 
         if (isInvincible) { return; }
