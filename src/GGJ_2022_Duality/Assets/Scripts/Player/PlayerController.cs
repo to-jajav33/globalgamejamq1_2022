@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false;
 
     [SerializeField]
-    private float jumpForce = 350f;
-    private float moveForce = 16f;
+    private float jumpForce = 100f;
+    private float moveForce = 750f;
 
     private float currHealth = 3;
     private float maxHealth = 3;
@@ -129,13 +129,12 @@ public class PlayerController : MonoBehaviour
         {
             if (!IsAgainstWall())
             {
-                body.velocity = new Vector2(moveForce, body.velocity.y);
+                body.velocity = new Vector2(moveForce * Time.deltaTime, body.velocity.y);
             }
             else
             {
                 body.velocity = new Vector2(0, body.velocity.y);
             }
-
         }
     }
 
@@ -187,9 +186,7 @@ public class PlayerController : MonoBehaviour
 
     private void FlyJumpCancel()
     {
-        // float moveInput = canMove ? 1 : 0;
-        // Vector2 jumpVector = moveInput * Vector2.down * jumpForce;
-        // body.AddForce(-jumpVector * 0.5f, ForceMode2D.Impulse);
+
     }
 
     public float GetCurrHealth()
@@ -221,8 +218,9 @@ public class PlayerController : MonoBehaviour
 
         isHit = true;
         StartCoroutine(StartInvinincibility(1f));
-        Vector2 hitVector = -1 * body.velocity.normalized * jumpForce/4;
-        hitVector.x *= 2;
+        Vector2 hitVector = -1 * body.velocity.normalized * jumpForce;
+        float xAmount = Mathf.Abs(hitVector.x);
+        hitVector.x *= Mathf.Abs((xAmount + 7) / xAmount);
         body.AddForce(hitVector, ForceMode2D.Impulse);
 
         currHealth -= amount;

@@ -105,7 +105,7 @@ public class LevelChunk : MonoBehaviour, IPoolReset
     public void Despawn()
     {
         OnChunkSpawn?.Invoke(false);
-        pool.DelayReturnToPool(1f);
+        pool.DelayReturnToPool(0.5f);
     }
 
     public void PlayerEnteredChunk()
